@@ -2,7 +2,7 @@
   "name": "studyvue",
   "version": "1.0.0",
   "description": "A Vue.js project",
-  "author": "Wh <707127675@qq.com>", 
+  "author": "Wh <707127675@qq.com>",
   "private": true,
   "scripts": {
     "dev": "webpack-dev-server --inline --progress --config build/webpack.dev.conf.js --open",
@@ -11,6 +11,7 @@
     "build": "node build/build.js"
   },
   "dependencies": {
+    "axios": "^0.18.0",
     "element-ui": "^2.4.11",
     "vue": "^2.5.2",
     "vue-router": "^3.0.1"

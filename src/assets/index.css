@@ -1,0 +1,10 @@
+*{
+    margin: 0;
+    display: 0;
+}
+html,body{
+    height:100%;
+}
+a{
+    text-decoration :none;  
+}
