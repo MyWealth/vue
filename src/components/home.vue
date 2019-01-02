@@ -14,7 +14,7 @@
         </el-col>
         <el-col :span="8">
           <div class="grid-content bg-purple left">
-            <a href="#">退出</a>
+            <a href="#" @click="clear()">退出</a>
           </div>
         </el-col>
       </el-row>
@@ -82,7 +82,18 @@
 </template>
 
 <script>
-export default {};
+export default {
+  data(){
+    return{
+
+    }
+  },
+  methods: {
+    clear(){
+      
+    }
+  },
+};
 </script>
 
 <style>
