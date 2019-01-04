@@ -21,17 +21,14 @@ export default {
         password:"",
         username:""
       }
-     
     }
   },
   methods: {
     Login(){
       this.$http.post("login", this.formdata)
       .then((response) => {
-        console.log(response)
         const {data:{data,meta:{msg,status}}} = response
         if(status === 200){
-          console.log(data.token)
           localStorage.setItem("token",data.token)
           this.$message({
           message:msg,

@@ -22,15 +22,14 @@
     <el-container>
       <el-aside class="nuv" width="200px">
         <div>
-          <el-menu default-active="2">
+          <el-menu  router default-active="2">
             <el-submenu index="1">
               <template slot="title">
                 <i class="el-icon-location"></i>
                 <span>用户管理</span>
               </template>
               <el-menu-item-group>
-                <el-menu-item index="1-1" class="el-icon-success">选项1</el-menu-item>
-                <el-menu-item index="1-2" class="el-icon-success">选项2</el-menu-item>
+                <el-menu-item index="users">选项1</el-menu-item>
               </el-menu-item-group>
             </el-submenu>
             <el-submenu index="2">
@@ -76,7 +75,9 @@
           </el-menu>
         </div>
       </el-aside>
-      <el-main class="body">Main</el-main>
+      <el-main class="body">
+        <router-view></router-view>
+      </el-main>
     </el-container>
   </el-container>
 </template>
@@ -88,11 +89,28 @@ export default {
 
     }
   },
+  created() {
+     this.beforeCreate
+  },
   methods: {
+    //退出
     clear(){
-      
+      localStorage.clear();
+      this.$router.push({
+        name:"/"
+      })
+      this.$message.success("退出成功");
     }
   },
+  //预测
+  beforeCreate(){
+    if(!localStorage.getItem("token")){
+       this.$message.warning("请先进行登陆");
+        this.$router.push({
+          name:"/"
+        })
+    }
+  }
 };
 </script>
 
@@ -101,10 +119,9 @@ export default {
   background-color: #b1becf;
 }
 .nuv {
-    
+    height: 100%;
 }
 .body {
-  background-color: brown;
   height:100%;
 }
 .bg-purple-light {
