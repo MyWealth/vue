@@ -3,9 +3,12 @@ import Router from 'vue-router'
 import login from "@/login"
 import home from "@/components/home"
 import users from "@/user"
+import rights from "@/rights"
+import roles from "@/roles"
+import { Message } from 'element-ui';
 Vue.use(Router)
 
-export default new Router({
+const router = new Router({
   routes: [
     {
       path:"/",
@@ -25,7 +28,31 @@ export default new Router({
       children:[{
         path:"/users",
         component:users
-      }]
+      },
+    {
+      path:"/rights",
+      component:rights
+    },
+    {
+      path:"/roles",
+      component:roles
+    }]
     }
   ]
 })
+router.beforeEach((to,form,next) =>{
+if(to.path === '/login'){
+  next()
+}else{
+  if(!localStorage.getItem('token')){
+    Message.warning('请先登录')
+    router.push({
+      name:"/"
+    })
+  }else{
+    next()
+  }
+}
+
+})
+export default router

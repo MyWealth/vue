@@ -23,23 +23,23 @@
       <el-aside class="nuv" width="200px">
         <div>
           <el-menu  router default-active="2">
-            <el-submenu index="1">
+            <el-submenu :index="item.order+''" v-for="(item, index) in arr" :key="index">
               <template slot="title">
                 <i class="el-icon-location"></i>
-                <span>用户管理</span>
+                <span>{{item.authName}}</span>
               </template>
-              <el-menu-item-group>
-                <el-menu-item index="users">选项1</el-menu-item>
+              <el-menu-item-group v-for="(item1, index1) in item.children" :key="index1">
+                <el-menu-item :index="item1.path">{{item1.authName}}</el-menu-item>
               </el-menu-item-group>
             </el-submenu>
-            <el-submenu index="2">
+            <!-- <el-submenu index="2">
               <template slot="title">
                 <i class="el-icon-location"></i>
                 <span>权限管理</span>
               </template>
               <el-menu-item-group>
-                <el-menu-item index="2-1" class="el-icon-success">选项1</el-menu-item>
-                <el-menu-item index="2-2" class="el-icon-success">选项2</el-menu-item>
+                <el-menu-item index="roles" class="el-icon-success">选项1</el-menu-item>
+                <el-menu-item index="rights" class="el-icon-success">选项2</el-menu-item>
               </el-menu-item-group>
             </el-submenu>
             <el-submenu index="3">
@@ -71,7 +71,7 @@
                 <el-menu-item index="5-1" class="el-icon-success">选项1</el-menu-item>
                 <el-menu-item index="5-2" class="el-icon-success">选项2</el-menu-item>
               </el-menu-item-group>
-            </el-submenu>
+            </el-submenu> -->
           </el-menu>
         </div>
       </el-aside>
@@ -86,11 +86,12 @@
 export default {
   data(){
     return{
-
+      arr:[]
     }
   },
   created() {
      this.beforeCreate
+     this.acquirelist()
   },
   methods: {
     //退出
@@ -100,20 +101,26 @@ export default {
         name:"/"
       })
       this.$message.success("退出成功");
+    },
+    async acquirelist(){
+    const res = await this.$http.get(`menus`);
+    const{data:{data}} = res
+    this.arr = data;
     }
   },
   //预测
-  beforeCreate(){
-    if(!localStorage.getItem("token")){
-       this.$message.warning("请先进行登陆");
-        this.$router.push({
-          name:"/"
-        })
-    }
-  }
+  // beforeCreate(){
+  //   if(!localStorage.getItem("token")){
+  //     console.log(this)
+  //      this.$message.warning("请先进行登陆");
+  //       this.$router.push({
+  //         name:"/"
+  //       })
+  //   }
+  // }
 };
 </script>
-
+  
 <style>
 .head {
   background-color: #b1becf;
