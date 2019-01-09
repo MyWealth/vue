@@ -3,11 +3,11 @@
     <!-- 面包屑 -->
     <my-bread data="活动管理" data-2="活动列表"></my-bread>
     <!-- 表格 -->
-    <el-table :data="tableData" class="tabla" stripe style="width: 100%">
-        <el-table-column  type="index" label="#" width="80"></el-table-column>
-        <el-table-column prop="authName" label="权限名称" width="180"></el-table-column>
-        <el-table-column prop="path" label="路径" width="180"></el-table-column>
-        <el-table-column  label="层级" width="150">
+    <el-table :data="tableData" class="tabla" stripe style="width: 100%" :v-loading="loading">
+        <el-table-column  type="index" label="#" width="180"></el-table-column>
+        <el-table-column prop="authName" label="权限名称" width="380"></el-table-column>
+        <el-table-column prop="path" label="路径" width="380"></el-table-column>
+        <el-table-column  label="层级" width="280">
             <template slot-scope="scope" >
                 <span v-if="scope.row.level==='0'">一级</span>
                  <span v-if="scope.row.level==='1'">二级</span>
@@ -22,7 +22,8 @@
 export default {
   data() {
     return {
-      tableData: []
+      tableData: [],
+      loading:true
     };
   },
 created() {
@@ -43,5 +44,7 @@ created() {
 }
 .tabla{
     margin-top: 20px;
+    height: 500px;
+    overflow: auto;
 }
 </style>

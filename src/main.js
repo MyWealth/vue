@@ -7,7 +7,7 @@ import ElementUI from 'element-ui'
 import 'element-ui/lib/theme-chalk/index.css'
 import "@/assets/index.css"
 import Http from "./http"
-import bread from "./crumbs"
+import bread from "@/components/crumbs"
 
 Vue.use(Http)
 Vue.use(ElementUI);
